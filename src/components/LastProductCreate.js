@@ -1,5 +1,6 @@
-import React, { Component } from "react";
+import React, {  Component } from "react";
 import Product from "./Product";
+
 
 class LastProductCreate extends Component{
 
@@ -7,11 +8,10 @@ class LastProductCreate extends Component{
         super()
         this.state = { products:null }}
         
-
         componentDidMount(){
             fetch('http://localhost:3001/api/products')
             .then(res => (res.json()))
-            .then(result => this.setState({products:result.data}))
+            .then(result => this.setState({products:result.data.filter(product => product === result.data[result.data.length -1])}))
             .catch(e => (console.log(e)))
         }
 
@@ -22,8 +22,12 @@ class LastProductCreate extends Component{
                     <section className="section-productos">
                     <h6 className="titulo-productos">Ultimo Producto Creado</h6>
                         {this.state.products === null ? <div className="cargando">Espere un momento por favor....</div> :
-                                            this.state.products.filter((product,index)=>{
-                                                return  <Product {...product}  key={index} />
+                                            this.state.products.map((product,index)=>{
+
+                                                return  <Product  {...product}  key={index} />
+                                                // return <li  key={index} >
+                                                //  {product.image}
+                                                //      </li>
                                             })
                                          }
             </section>

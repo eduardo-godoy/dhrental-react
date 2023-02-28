@@ -1,5 +1,5 @@
 import React from "react";
-import notFound from '../assets/images/error404.png'
+import notFound from '../assets/images/error-404.png'
 
 function NotFound(){
 
